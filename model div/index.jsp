@@ -1,0 +1,74 @@
+<%-- 
+    Document   : index
+    Created on : 2013-3-13, 15:34:03
+    Author     : Shawn
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <script src="jquery-1.8.2.min.js"></script>
+        <script src="model_div.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#testDiv").openDiv({
+                    width:"100",
+                    height:100,
+                    transition:"",
+                    speed:3
+                });
+            });
+            
+            function openDiv1() {
+                $("#testDiv").openDiv({
+                    width:"100",
+                    height:100,
+                    transition:"waterfall",
+                    speed:3
+                });
+            }
+            function openDiv2() {
+                $("#testDiv").openDiv({
+                    width:"100",
+                    height:100,
+                    transition:"slideLeft",
+                    speed:3
+                });
+            }
+            function openDiv3() {
+                $("#testDiv").openDiv({
+                    width:"100",
+                    height:100,
+                    transition:"slideRight",
+                    speed:3
+                });
+            }
+            function openDiv4() {
+                $("#testDiv").openDiv({
+                    width:"100",
+                    height:100,
+                    transition:"fade",
+                    speed:1
+                });
+            }
+            function closeDiv() {
+                $("#testDiv").closeDiv();
+                
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="openDiv1();">SlideDown</button>
+        <button onclick="openDiv2();">SlideLeft</button>
+        <button onclick="openDiv3();">SlideRight</button>
+        <button onclick="openDiv4();">Fade</button>
+        <div id="testDiv" style="display: none;background: green;width: 100%;height: 100%;">
+            <button onclick="closeDiv();">Close</button>
+            123<br/>456<br/>789
+        </div> 
+        <div style="height: 2000px;width: 2000px;overflow: scroll;background: yellow;"></div>
+    </body>
+</html>
