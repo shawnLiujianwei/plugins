@@ -5,8 +5,14 @@
         var vargs = {};
         var methods = {
             init: function(obj, options) {
+                
+                if(options.mask) {
+                     var div1 = $('<div id="' + timestrapId + 'mask"  style="position: absolute;background:black;z-index:99999;filter:alpha(opacity=50); -moz-opacity:0.5; opacity:0.5;"></div>');
+                     $("html").append(div1.show());
+                }
+                
                 var div = $('<div id="' + timestrapId + '"  style="position: absolute;display:none;z-index:100000;"></div>');
-                var target = $(obj).clone();
+                var target = $(obj);
                 vargs = options;
                 target.show();
                 div.append(target);
@@ -15,6 +21,7 @@
                 _priveteMethods.animate('open');
             }, close: function() {
                 _priveteMethods.animate('close');
+                $("#" + timestrapId+"mask").remove();
             }
         };
 
@@ -30,6 +37,8 @@
                     if (width === 'auto') {
                         width = bodyWidth;
                     }
+                    
+                    
                     $("#" + timestrapId).css({"height": height, "width": width});
                     var left = vargs.left;
                     if (left === 0) {
@@ -51,6 +60,16 @@
                         left: left,
                         top: top
                     });
+                    
+                    var mask = $("#" + timestrapId+"mask");
+                    if(mask !== undefined) {
+                        mask.css({"height": bodyHeight, "width": bodyWidth});
+                        mask.offset({
+                        left: scrollLeft,
+                        top: scrollTop
+                    });
+                    }
+                    
                 } catch (e) {
                     window.console.log("Error when init style:" + e);
                 }
@@ -136,7 +155,8 @@
             height: "auto",
             width: "auto",
             transition: "slideLeft",
-            speed: "500"
+            speed: "500",
+            mask:false
         };
         var opts = $.extend(defaults, options);
         dotterDiv.init(this, opts);
